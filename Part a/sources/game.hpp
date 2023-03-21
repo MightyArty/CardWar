@@ -14,20 +14,17 @@ namespace ariel
     private:
         Player player1;
         Player player2;
-        vector<Card> drawPile;
-        vector<Card> discardPile;
+        vector<Card> deck;
+        vector<Card> cardsPlayed;
         vector<string> log;
-        int turn;
-
-        void createDeck();
-        void shuffleDeck();
-        void dealCards();
-        void dealOneCard(Player &p);
-        void playRound();
-        void roundWinner(Card c1, Card c2, Player &p1, Player &p2);
+        int numOfDraws;
+        bool gameOver;
 
     public:
         Game(Player &p1, Player &p2);
+        void shuffleDeck();
+        void dealCards();
+        Card getCard();
         void playTurn();
         void playAll();
         void printLastTurn() const;

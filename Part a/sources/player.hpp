@@ -13,17 +13,16 @@ namespace ariel
     {
     private:
         string name;
-        vector<Card> stack;
+        vector<Card> hand;
 
     public:
-        Player(string name);
-        void addCard(Card c);
-        void removeCard(Card c);
+        Player(const string name);
         string getName() const;
+        Player setName(const string name);
+        void addCard(const Card& card);
+        Card playCard(const Card&);
         int stacksize() const;
         int cardesTaken() const;
-        bool operator==(const Player &other) const;
-        bool operator!=(const Player &other) const;
     };
 }
 

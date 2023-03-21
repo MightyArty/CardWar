@@ -10,18 +10,20 @@ namespace ariel
     class Card
     {
     private:
-        int rank;
-        string type; // Hearts, Diamonds, Clubs or Spadec
+        string rank; // {ace,two,three,...,king}
+        string type; // {hearts, clubs, diamonds, spades}
+        bool faceUp; // card face up or down
 
     public:
-        Card(int rank, string type);
-        int getRank() const;
-        string getType() const;
+        Card(string rank, string type, bool faceUp = true);
+        const string getRank() const;
+        const string getType() const;
         bool operator<(const Card &other) const;
         bool operator>(const Card &other) const;
         bool operator==(const Card &other) const;
         bool operator!=(const Card &other) const;
-        friend std::ostream &operator<<(std::ostream &os, const Card &c);
+        bool operator>=(const Card &other) const;
+        bool operator<=(const Card &other) const;
     };
 
 }

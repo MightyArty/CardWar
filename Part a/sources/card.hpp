@@ -15,9 +15,11 @@ namespace ariel
         bool faceUp; // card face up or down
 
     public:
-        Card(string rank, string type, bool faceUp = true);
+        Card(string rank, string type, int value);
         const string getRank() const;
         const string getType() const;
+        string toString() const;
+        int getValue() const;
         bool operator<(const Card &other) const;
         bool operator>(const Card &other) const;
         bool operator==(const Card &other) const;

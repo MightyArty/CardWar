@@ -15,22 +15,27 @@ namespace ariel
         Player player1;
         Player player2;
         vector<Card> deck;
-        vector<Card> cardsPlayed;
+        vector<Card> history;
         vector<string> log;
-        int numOfDraws;
-        bool gameOver;
+        int turnCounter;
+        string winner;
 
     public:
         Game(Player &p1, Player &p2);
+        ~Game();
         void shuffleDeck();
         void dealCards();
-        Card getCard();
+        int getDeckSize();
+        int getHistorySize();
         void playTurn();
         void playAll();
         void printLastTurn() const;
         void printWiner() const;
         void printLog() const;
         void printStats() const;
+        bool gameOver() const;
+        bool draw() const;
+        Player getWinner();
     };
 }
 

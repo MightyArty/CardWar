@@ -13,14 +13,14 @@ namespace ariel
     {
     private:
         string name;
-        vector<Card> hand;
+        vector<Card> Cards;
 
     public:
-        Player(const string name);
+        Player(string name);
+        ~Player();
         string getName() const;
-        Player setName(const string name);
-        void addCard(const Card& card);
-        Card playCard(const Card&);
+        Card playCard(int index);
+        void takeCard(Card c);
         int stacksize() const;
         int cardesTaken() const;
     };

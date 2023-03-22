@@ -17,68 +17,97 @@ using namespace ariel;
 
 TEST_CASE("Player")
 {
-    Player player("Tom");
+    Player p("Tom");
 
-    SUBCASE("Player name")
+    SUBCASE("Constructor")
     {
-        CHECK(player.getName() == "Tom");
-        player.setName("Bar");
-        CHECK(player.getName() == "Bar");
+        CHECK(p.getName() == "Tom");
+        CHECK(p.stacksize() == 0);
+        CHECK(p.cardesTaken() == 0);
     }
 
-    SUBCASE("Add card to hand")
+    SUBCASE("Taking a card")
     {
-        Card c1("ACE", "HEARTS", true);
-        player.addCard(c1);
-        CHECK(player.stacksize() == 1);
+        Card c1("Ace", "Hearts", 1);
+        p.takeCard(c1);
+        CHECK(p.stacksize() == 1);
+        CHECK(p.cardesTaken() == 1);
+
+        Card c2 = p.playCard(0);
+        CHECK(c2.toString() == "Ace of Hearts");
+        CHECK(p.stacksize() == 0);
     }
 
-    SUBCASE("Play card")
+    SUBCASE("Play a card")
     {
-        Card c1("TEN", "SPADES", true);
-        Card c2("ACE", "CLUBS", true);
-        player.addCard(c1);
-        Card player_card = player.playCard(c1);
-        CHECK(player_card == c1);
+        Card c1("Queen", "Hearts", 12);
+        Card c2("5", "Spades", 5);
+        p.takeCard(c1);
+        p.takeCard(c2);
+
+        Card c3 = p.playCard(1);
+        CHECK(c3.toString() == "5 of Spades");
+        CHECK(p.stacksize() == 1);
+
+        Card c4 = p.playCard(0);
+        CHECK(c4.toString() == "Queen of Hearts");
+        CHECK(p.stacksize() == 0);
     }
 }
 
 TEST_CASE("Card")
 {
+    SUBCASE("Constructor")
+    {
+        Card c("10", "Diamonds", 10);
+        CHECK(c.getType() == "Diamonds");
+        CHECK(c.getType() == "10");
+        CHECK(c.getValue() == 10);
+        CHECK(c.toString() == "10 of Diamonds");
+    }
+
     SUBCASE("Equal")
     {
-        Card c1("TEN", "CLUBS", true);
-        Card c2("TEN", "CLUBS", true);
+        Card c1("10", "Clubs", 10);
+        Card c2("10", "Diamonds", 10);
         CHECK(c1 == c2);
     }
     SUBCASE("Greater then")
     {
-        Card c1("TEN", "CLUBS", true);
-        Card c2("KING", "HEARTS", true);
+        Card c1("10", "Clubs", 10);
+        Card c2("King", "Hearts", 13);
         CHECK(c2 > c1);
-    }
-    SUBCASE("Smaller then")
-    {
-        Card c1("TWO", "CLUBS", true);
-        Card c2("ACE", "HEARTS", true);
-        CHECK(c1 < c2);
     }
     SUBCASE("Greater or equal then")
     {
-        Card c1("QUEEN", "CLUBS", true);
-        Card c2("QUEEN", "HEARTS", true);
+        Card c1("Queen", "Clubs", 12);
+        Card c2("Queen", "Hearts", 12);
         CHECK(c2 <= c1);
+    }
+    SUBCASE("Not equal")
+    {
+        Card c1("5", "Diamonds", 5);
+        Card c2("Jack", "Spades", 11);
+        CHECK(c1 != c2);
     }
 }
 
 TEST_CASE("Game")
 {
-    Player p1("Tom");
-    Player p2("Neta");
-    Game game(p1,p2);
+    Player p1("Bar");
+    Player p2("Yosi");
+    Game game(p1, p2);
 
-    SUBCASE("Shuffle")
+    SUBCASE("Constructor")
+    {
+        CHECK(game.getDeckSize() == 52);
+        CHECK(game.getHistorySize() == 0);
+        CHECK(!game.gameOver());
+        CHECK(!game.draw());
+    }
+
+    SUBCASE("Shuffle deck")
     {
         game.shuffleDeck();
-    }
+        }
 }

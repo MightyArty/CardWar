@@ -61,7 +61,7 @@ TEST_CASE("Card")
     {
         Card c("10", "Diamonds", 10);
         CHECK(c.getType() == "Diamonds");
-        CHECK(c.getType() == "10");
+        CHECK(c.getRank() == "10");
         CHECK(c.getValue() == 10);
         CHECK(c.toString() == "10 of Diamonds");
     }
@@ -106,8 +106,44 @@ TEST_CASE("Game")
         CHECK(!game.draw());
     }
 
-    SUBCASE("Shuffle deck")
+    SUBCASE("getLastTurn function")
     {
-        game.shuffleDeck();
+        for (int i = 0; i < 5; i++)
+        {
+            game.playTurn();
         }
+        string last_turn = game.printLastTurn();
+        CHECK(last_turn.size() > 0);
+    }
+
+    SUBCASE("stacksize and cardesTaken methods")
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            game.playTurn();
+        }
+        CHECK(p1.stacksize() + p2.stacksize() == 42);
+        CHECK(p1.cardesTaken() + p2.cardesTaken() == 10);
+    }
+
+    SUBCASE("playAll function")
+    {
+        game.playAll();
+        string winner = game.printWiner();
+        CHECK((winner == "Bar" || winner == "Yosi"));
+    }
+
+    SUBCASE("printLog function")
+    {
+        game.playAll();
+        string log = game.printLog();
+        CHECK(log.size() > 0);
+    }
+
+    SUBCASE("printStats function")
+    {
+        game.playAll();
+        string stats = game.printStats();
+        CHECK(stats.size() > 0);
+    }
 }

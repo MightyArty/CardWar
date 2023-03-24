@@ -29,13 +29,12 @@ namespace ariel
         int getHistorySize();
         void playTurn();
         void playAll();
-        void printLastTurn() const;
-        void printWiner() const;
-        void printLog() const;
-        void printStats() const;
+        string printLastTurn() const;
+        string printWiner() const;
+        string printLog() const;
+        string printStats() const;
         bool gameOver() const;
         bool draw() const;
-        Player getWinner();
     };
 }
 

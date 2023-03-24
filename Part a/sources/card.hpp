@@ -9,6 +9,7 @@ namespace ariel
 {
     class Card
     {
+
     private:
         string rank; // {ace,two,three,...,king}
         string type; // {hearts, clubs, diamonds, spades}

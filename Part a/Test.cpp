@@ -55,117 +55,125 @@ TEST_CASE("Player")
     }
 }
 
-// TEST_CASE("Card")
-// {
-//     Card c1(Card::Rank::Ace, Card::Type::Hearts);
-//     Card c2(Card::Rank::Two, Card::Type::Clubs);
-//     Card c3(Card::Rank::Jack, Card::Type::Diamonds);
-//     Card c4(Card::Rank::King, Card::Type::Spades);
-//     Card c5(Card::Rank::Ace, Card::Type::Hearts);
+TEST_CASE("Card")
+{
+    Card c1("Ace", "Hearts", 1);
+    Card c2("Two", "Clubs", 2);
+    Card c3("Jack", "Diamonds", 11);
+    Card c4("King", "Spades", 13);
+    Card c5("Ace", "Hearts", 1);
 
-//     SUBCASE("Constructor")
-//     {
-//         Card c(Card::Rank::Ten, Card::Type::Diamonds);
-//         CHECK(c.getType() == "Diamonds");
-//         CHECK(c.getRank() == "10");
-//         CHECK(c.getValue() == 10);
-//         CHECK(c.toString() == "10 of Diamonds");
-//     }
+    SUBCASE("Constructor")
+    {
+        Card c("Ten", "Diamonds", 10);
+        CHECK(c.getType() == "Diamonds");
+        CHECK(c.getRank() == "Ten");
+        CHECK(c.getValue() == 10);
+        CHECK(c.toString() == "Ten of Diamonds");
+    }
 
-//     SUBCASE("getRank")
-//     {
-//         CHECK(c1.getRank() == "Ace");
-//         CHECK(c2.getRank() == "Two");
-//         CHECK(c3.getRank() == "Jack");
-//         CHECK(c4.getRank() == "King");
-//     }
+    SUBCASE("getRank")
+    {
+        CHECK(c1.getRank() == "Ace");
+        CHECK(c2.getRank() == "Two");
+        CHECK(c3.getRank() == "Jack");
+        CHECK(c4.getRank() == "King");
+    }
 
-//     SUBCASE("getType")
-//     {
-//         CHECK(c1.getType() == "Hearts");
-//         CHECK(c2.getType() == "Clubs");
-//         CHECK(c3.getType() == "Diamonds");
-//         CHECK(c4.getType() == "Spades");
-//     }
+    SUBCASE("getType")
+    {
+        CHECK(c1.getType() == "Hearts");
+        CHECK(c2.getType() == "Clubs");
+        CHECK(c3.getType() == "Diamonds");
+        CHECK(c4.getType() == "Spades");
+    }
 
-//     SUBCASE("getValue")
-//     {
-//         CHECK(c1.getValue() == 1);
-//         CHECK(c2.getValue() == 2);
-//         CHECK(c3.getValue() == 11);
-//         CHECK(c4.getValue() == 13);
-//     }
+    SUBCASE("getValue")
+    {
+        CHECK(c1.getValue() == 1);
+        CHECK(c2.getValue() == 2);
+        CHECK(c3.getValue() == 11);
+        CHECK(c4.getValue() == 13);
+    }
 
-//     SUBCASE("toString")
-//     {
-//         CHECK(c1.toString() == "Ace of Hearts");
-//         CHECK(c2.toString() == "Two of Clubs");
-//         CHECK(c3.toString() == "Jack of Diamonds");
-//         CHECK(c4.toString() == "King of Spades");
-//     }
+    SUBCASE("toString")
+    {
+        CHECK(c1.toString() == "Ace of Hearts");
+        CHECK(c2.toString() == "Two of Clubs");
+        CHECK(c3.toString() == "Jack of Diamonds");
+        CHECK(c4.toString() == "King of Spades");
+    }
 
-//     SUBCASE("Testing comparison operators of two cards")
-//     {
-//         CHECK(c1 < c2);
-//         CHECK(c1 <= c3);
-//         CHECK(c1 == c5);
-//         CHECK(c1 != c4);
-//         CHECK(c4 > c2);
-//         CHECK(c4 >= c3);
-//     }
-// }
+    SUBCASE("Testing comparison operators of two cards")
+    {
+        CHECK(c1 < c2);
+        CHECK(c1 <= c3);
+        CHECK(c1 == c5);
+        CHECK(c1 != c4);
+        CHECK(c4 > c2);
+        CHECK(c4 >= c3);
+    }
+}
 
-// TEST_CASE("Game")
-// {
-//     Player p1("Bar");
-//     Player p2("Yosi");
-//     Game game(p1, p2);
+TEST_CASE("Game")
+{
 
-//     SUBCASE("Constructor")
-//     {
-//         CHECK(game.getDeckSize() == 52);
-//         CHECK(game.getHistorySize() == 0);
-//         CHECK(!game.gameOver());
-//         CHECK(!game.draw());
-//     }
+    SUBCASE("Constructor")
+    {
+        Player p1("Bar");
+        Player p2("Yosi");
+        Game game(p1, p2);
 
-//     SUBCASE("getLastTurn function")
-//     {
-//         for (int i = 0; i < 5; i++)
-//         {
-//             game.playTurn();
-//         }
-//         CHECK(game.printLastTurn() != NULL);
-//     }
+        CHECK(game.getDeckSize() == 52);
+        CHECK(game.getHistorySize() == 0);
+        CHECK(!game.gameOver());
+        CHECK(!game.draw());
+    }
 
-//     SUBCASE("stacksize and cardesTaken methods")
-//     {
-//         for (int i = 0; i < 10; i++)
-//         {
-//             game.playTurn();
-//         }
-//         CHECK(p1.stacksize() + p2.stacksize() == 42);
-//         CHECK(p1.cardesTaken() + p2.cardesTaken() == 10);
-//     }
+    SUBCASE("One turn play")
+    {
+        Player p1("Bar");
+        Player p2("Yosi");
+        Game game(p1, p2);
 
-//     SUBCASE("playAll function")
-//     {
-//         game.playAll();
-//         string winner = game.printWiner();
-//         CHECK((winner == "Bar" || winner == "Yosi"));
-//     }
+        game.playTurn();
+        CHECK(game.getDeckSize() == 51);
+        CHECK(game.getHistorySize() == 1);
+    }
 
-//     SUBCASE("printLog function")
-//     {
-//         game.playAll();
-//         string log = game.printLog();
-//         CHECK(log.size() > 0);
-//     }
+    SUBCASE("stacksize and cardesTaken methods")
+    {
+        Player p1("Bar");
+        Player p2("Yosi");
+        Game game(p1, p2);
 
-//     SUBCASE("printStats function")
-//     {
-//         game.playAll();
-//         string stats = game.printStats();
-//         CHECK(stats.size() > 0);
-//     }
-// }
+        for (int i = 0; i < 10; i++)
+        {
+            game.playTurn();
+        }
+        CHECK(p1.stacksize() + p2.stacksize() == 42);
+        CHECK(p1.cardesTaken() + p2.cardesTaken() == 10);
+    }
+
+    SUBCASE("playAll function")
+    {
+        Player p1("Bar");
+        Player p2("Yosi");
+        Game game(p1, p2);
+
+        game.playAll();
+        CHECK(game.getDeckSize() == 0);
+        CHECK(game.getHistorySize() == 52);
+    }
+
+    SUBCASE("printWinner function")
+    {
+        Player p1("Bar");
+        Player p2("Yosi");
+        Game game(p1, p2);
+
+        game.playAll();
+        game.printWiner();
+        CHECK(game.draw() == false);
+    }
+}

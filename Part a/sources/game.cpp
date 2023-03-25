@@ -5,45 +5,56 @@
 
 using namespace ariel;
 
-namespace ariel{
-    Game::Game(Player &p1, Player &p2): p1(p1), p2(p2){
+namespace ariel
+{
+    Game::Game(Player &p1, Player &p2) : p1(p1), p2(p2){
 
-    };
+                                                 };
 
     Game::~Game(){
 
     };
 
-    void Game::playTurn(){
+    void Game::playTurn()
+    {
     }
 
-    void Game::playAll(){
+    void Game::playAll()
+    {
     }
 
-    void Game::printLastTurn(){
+    void Game::printLastTurn()
+    {
     }
 
-    void Game::printWiner(){
+    void Game::printWiner()
+    {
     }
 
-    void Game::printLog(){
+    void Game::printLog()
+    {
     }
 
-    void Game::printStats(){
+    void Game::printStats()
+    {
     }
 
-    int getDeckSize(){
+    int Game::getDeckSize()
+    {
         return 0;
     };
-    int getHistorySize(){
+    int Game::getHistorySize()
+    {
         return 0;
     };
 
-    bool gameOver(){
+    bool Game::gameOver()
+    {
         return false;
     }
 
-    bool draw(){
+    bool Game::draw()
+    {
         return false;
     }
 }

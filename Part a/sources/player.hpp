@@ -12,17 +12,20 @@ namespace ariel
     class Player
     {
     private:
+        vector<Card> cards;
         string name;
-        vector<Card> Cards;
+        int cards_taken;
+        int stack_size;
+        
 
     public:
         Player(string name);
-        ~Player();
-        string getName() const;
+        Player();
+        string getName();
         Card playCard(int index);
         void takeCard(Card c);
-        int stacksize() const;
-        int cardesTaken() const;
+        int stacksize();
+        int cardesTaken();
     };
 }
 

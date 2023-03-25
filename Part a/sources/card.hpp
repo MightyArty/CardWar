@@ -9,24 +9,22 @@ namespace ariel
 {
     class Card
     {
-
-    private:
-        string rank; // {ace,two,three,...,king}
-        string type; // {hearts, clubs, diamonds, spades}
-        bool faceUp; // card face up or down
-
     public:
+        string type; // {Hearts, Diamonds, ...}
+        string rank; // {Ace, Two, ...}
+        int value;
         Card(string rank, string type, int value);
-        const string getRank() const;
-        const string getType() const;
-        string toString() const;
-        int getValue() const;
-        bool operator<(const Card &other) const;
-        bool operator>(const Card &other) const;
-        bool operator==(const Card &other) const;
-        bool operator!=(const Card &other) const;
-        bool operator>=(const Card &other) const;
-        bool operator<=(const Card &other) const;
+        ~Card();
+        string getRank();
+        string getType();
+        string toString();
+        int getValue();
+        bool operator<(const Card &other);
+        bool operator>(const Card &other);
+        bool operator==(const Card &other);
+        bool operator!=(const Card &other);
+        bool operator>=(const Card &other);
+        bool operator<=(const Card &other);
     };
 
 }

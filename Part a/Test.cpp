@@ -53,6 +53,11 @@ TEST_CASE("Player")
         CHECK(c4.toString() == "Queen of Hearts");
         CHECK(p.stacksize() == 0);
     }
+
+    SUBCASE("Initialize player with no name")
+    {
+        CHECK_THROWS(new Player(""));
+    }
 }
 
 TEST_CASE("Card")
@@ -175,5 +180,19 @@ TEST_CASE("Game")
         game.playAll();
         game.printWiner();
         CHECK(game.draw() == false);
+    }
+
+    SUBCASE("Create game with two same players")
+    {
+        Player p1("Tom");
+        Player p2("Tom");
+        CHECK_THROWS(new Game(p1, p2));
+    }
+
+    SUBCASE("Create game where one player has no name")
+    {
+        Player p1("Tom");
+        Player p2("");
+        CHECK_THROWS(new Game(p1, p2));
     }
 }

@@ -7,7 +7,7 @@ In this assigment we will implement the card war game for 2 players.
 
 There is a normal deck of cards with 52 cards, at the beginning of the game the deck is shuffled (randomly) and divided equally between the two players.
 
-On each turn the players draw one card from the top of their pile adn the player with the highest card takes both cards to him (2 Ace wins).
+On each turn the players draw one card from the top of their pile and the player with the highest card takes both cards to him (2 wins Ace, but Ace wins all other cards).
 
 If the players have drawn two identical cards then they place once card face down and a lesser card on top of it.
 

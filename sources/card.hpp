@@ -19,12 +19,13 @@ namespace ariel
         string getType();
         string toString();
         int getValue();
+
+        /**
+         * Boolean operators for 2 given cards
+         */
         bool operator<(const Card &other);
         bool operator>(const Card &other);
         bool operator==(const Card &other);
-        bool operator!=(const Card &other);
-        bool operator>=(const Card &other);
-        bool operator<=(const Card &other);
     };
 
 }

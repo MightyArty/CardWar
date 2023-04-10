@@ -12,20 +12,33 @@ namespace ariel
     class Player
     {
     private:
-        vector<Card> cards;
+        vector<Card> cards;     // the cards at the begining
+        vector<Card> won_cards; // the cards after winning/losing each round
         string name;
-        int cards_taken;
-        int stack_size;
-        
+        int cards_taken;   // amount of cards the player took
+        int stack_size;    // the size of the player stack
+        int wining_rounds; // how much rounds the player won
 
     public:
         Player(string name);
         Player();
+        ~Player();
+
         string getName();
+
         Card playCard(int index);
+
         void takeCard(Card c);
+
+        void addWonCard(Card c);
+
         int stacksize();
+
         int cardesTaken();
+
+        int getWins();
+
+        void increment_wins();
     };
 }
 

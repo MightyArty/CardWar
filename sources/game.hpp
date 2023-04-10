@@ -12,8 +12,8 @@ namespace ariel
     class Game
     {
     private:
-        Player p1;
-        Player p2;
+        Player *p1;
+        Player *p2;
         vector<Card> deck;
         vector<Card> history;
         vector<string> log;
@@ -32,7 +32,9 @@ namespace ariel
         int getHistorySize();
 
         bool gameOver();
-        bool draw();
+
+        void createDeck();
+        void shuffleDeck();
     };
 }
 

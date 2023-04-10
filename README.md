@@ -16,3 +16,12 @@ The high card player takes all six card. If there is a tie again, continue with 
 The turn continues intil one of the players takes the pot or runs out of cards. If you run out of cards while breaking a tie, each player takes the cards he threw (divide the pot half and half).
 
 The game continues until the players run out of card and the winner is the player who took the most cards.
+
+## How to run
+```bash
+# Clone the repository
+$ git clone "https://github.com/MightyArty/CardWar.git"
+# Open terminal on linux
+$ Run "make demo && ./demo"
+$ Run "make test && ./test"
+$ Run "bash ./grade"

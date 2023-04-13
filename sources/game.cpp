@@ -322,11 +322,14 @@ namespace ariel
     }
 
     /**
-     * @return true/false if the game over or not
+     * @brief Check if the players run out of cards or the total rounds is more then 26
+     * @return true: if the game is over.
+     * @return false: if the game is running
      */
     bool Game::gameOver()
     {
-        return (player1->stacksize() == 0 || player2->stacksize() == 0);
+        int total = getHistorySize() / 2;
+        return (player1->stacksize() == 0 || player2->stacksize() == 0 || total > 26);
     }
 
     /**

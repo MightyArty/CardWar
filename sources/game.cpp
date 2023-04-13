@@ -228,15 +228,11 @@ namespace ariel
      */
     void Game::printWiner()
     {
-        // int p1_cards = player1->cardesTaken();
-        // int p2_cards = player2->cardesTaken();
-        int p1_cards = player1->getWins();
-        int p2_cards = player2->getWins();
-        if (p1_cards > p2_cards)
+        if (player1->cardesTaken() > player2->cardesTaken())
         {
             log.push_back(player1->getName() + " is the winner");
         }
-        else if (p1_cards < p2_cards)
+        else if (player1->cardesTaken() < player2->cardesTaken())
         {
             log.push_back(player2->getName() + " is the winner");
         }
@@ -328,7 +324,11 @@ namespace ariel
      */
     bool Game::gameOver()
     {
-        int total = getHistorySize() / 2;
+        int total;
+        if (getHistorySize() != 0)
+            total = getHistorySize() / 2;
+        else
+            total = 1;
         return (player1->stacksize() == 0 || player2->stacksize() == 0 || total > 26);
     }
 

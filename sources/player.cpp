@@ -34,11 +34,6 @@ namespace ariel
     }
 
     /**
-     * @brief De-Constructor
-     */
-    // Player::~Player() {}
-
-    /**
      * @return the card amount of the player
      */
     int Player::stacksize()

@@ -65,18 +65,20 @@ namespace ariel
      */
     Game::Game(Player &player1, Player &player2)
     {
+
         this->player1 = &player1;
         this->player2 = &player2;
         welcome();
 
         createDeck();
         shuffleDeck();
-    }
 
-    /**
-     * @brief De-Constructor for the game
-     */
-    // Game::~Game() {}
+        if (gameOver())
+        {
+            throw runtime_error("The game is over!");
+            return;
+        }
+    }
 
     /**
      * @brief Play one turn between the two players
@@ -85,7 +87,7 @@ namespace ariel
     {
         if (this->player1->getName() == this->player2->getName())
         {
-            throw runtime_error("Players names need to be different!");
+            throw runtime_error("Players names should be different!");
             return;
         }
 
@@ -226,8 +228,10 @@ namespace ariel
      */
     void Game::printWiner()
     {
-        int p1_cards = player1->cardesTaken();
-        int p2_cards = player2->cardesTaken();
+        // int p1_cards = player1->cardesTaken();
+        // int p2_cards = player2->cardesTaken();
+        int p1_cards = player1->getWins();
+        int p2_cards = player2->getWins();
         if (p1_cards > p2_cards)
         {
             log.push_back(player1->getName() + " is the winner");

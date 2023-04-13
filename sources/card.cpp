@@ -18,11 +18,6 @@ namespace ariel
     }
 
     /**
-     * @brief De-Constructor for the Card
-     */
-    // Card::~Card() = default;
-
-    /**
      * @return the rank of the card
      */
     string Card::getRank()

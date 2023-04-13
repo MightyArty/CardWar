@@ -59,14 +59,14 @@ namespace ariel
 {
     /**
      * @brief Create a new game
-     * @param p1: first player
-     * @param p2: second player
+     * @param player1: first player
+     * @param player2: second player
      * @return a new Game
      */
-    Game::Game(Player &p1, Player &p2)
+    Game::Game(Player &player1, Player &player2)
     {
-        this->p1 = &p1;
-        this->p2 = &p2;
+        this->player1 = &player1;
+        this->player2 = &player2;
         welcome();
 
         createDeck();
@@ -76,14 +76,14 @@ namespace ariel
     /**
      * @brief De-Constructor for the game
      */
-    Game::~Game() {}
+    // Game::~Game() {}
 
     /**
      * @brief Play one turn between the two players
      */
     void Game::playTurn()
     {
-        if (this->p1->getName() == this->p2->getName())
+        if (this->player1->getName() == this->player2->getName())
         {
             throw runtime_error("Players names need to be different!");
             return;
@@ -96,12 +96,12 @@ namespace ariel
         }
 
         // Draw one card from each player pile
-        Card c1 = this->p1->playCard(0);
-        Card c2 = this->p2->playCard(0);
+        Card c1 = this->player1->playCard(0);
+        Card c2 = this->player2->playCard(0);
         history.push_back(c1);
         history.push_back(c2);
-        log.push_back(p1->getName() + " played: " + c1.toString());
-        log.push_back(p2->getName() + " played: " + c2.toString());
+        log.push_back(player1->getName() + " played: " + c1.toString());
+        log.push_back(player2->getName() + " played: " + c2.toString());
 
         // there is a tie, BEGIN WAR!
         if (c1.getValue() == c2.getValue())
@@ -109,23 +109,23 @@ namespace ariel
             green();
             cout << "There is a tie, begining WAR " << endl;
             reset();
-            if (p1->stacksize() == 0 || p2->stacksize() == 0)
+            if (player1->stacksize() == 0 || player2->stacksize() == 0)
             {
-                cout << "Not enough cards for: " << p1->getName() << " or " << p2->getName() << endl;
+                cout << "Not enough cards for: " << player1->getName() << " or " << player2->getName() << endl;
                 return;
             }
-            Card c1_hidden = p1->playCard(0);
-            Card c2_hidden = p2->playCard(0);
-            Card c1_visible = p1->playCard(0);
-            Card c2_visible = p2->playCard(0);
+            Card c1_hidden = player1->playCard(0);
+            Card c2_hidden = player2->playCard(0);
+            Card c1_visible = player1->playCard(0);
+            Card c2_visible = player2->playCard(0);
 
             history.push_back(c1_hidden);
             history.push_back(c2_hidden);
             history.push_back(c1_visible);
             history.push_back(c2_visible);
 
-            log.push_back(p1->getName() + " placed: " + c1_hidden.toString() + " face down, and " + c1_visible.toString() + " face up");
-            log.push_back(p2->getName() + " placed: " + c2_hidden.toString() + " face down, and " + c2_visible.toString() + " face up");
+            log.push_back(player1->getName() + " placed: " + c1_hidden.toString() + " face down, and " + c1_visible.toString() + " face up");
+            log.push_back(player2->getName() + " placed: " + c2_hidden.toString() + " face down, and " + c2_visible.toString() + " face up");
 
             // if there is another tie, repeat the proccess
             while (c1_visible.getValue() == c2_visible.getValue())
@@ -133,47 +133,47 @@ namespace ariel
                 green();
                 cout << "There is a tie, begining WAR " << endl;
                 reset();
-                if (p1->stacksize() == 0 || p2->stacksize() == 0)
+                if (player1->stacksize() == 0 || player2->stacksize() == 0)
                 {
-                    cout << "Not enough cards for: " << p1->getName() << " or " << p2->getName() << endl;
+                    cout << "Not enough cards for: " << player1->getName() << " or " << player2->getName() << endl;
                     return;
                 }
-                c1_hidden = p1->playCard(0);
-                c2_hidden = p2->playCard(0);
-                c1_visible = p1->playCard(0);
-                c2_visible = p2->playCard(0);
+                c1_hidden = player1->playCard(0);
+                c2_hidden = player2->playCard(0);
+                c1_visible = player1->playCard(0);
+                c2_visible = player2->playCard(0);
 
                 history.push_back(c1_hidden);
                 history.push_back(c2_hidden);
                 history.push_back(c1_visible);
                 history.push_back(c2_visible);
 
-                log.push_back(p1->getName() + " placed: " + c1_hidden.toString() + " face down, and " + c1_visible.toString() + " face up");
-                log.push_back(p2->getName() + " placed: " + c2_hidden.toString() + " face down, and " + c2_visible.toString() + " face up");
+                log.push_back(player1->getName() + " placed: " + c1_hidden.toString() + " face down, and " + c1_visible.toString() + " face up");
+                log.push_back(player2->getName() + " placed: " + c2_hidden.toString() + " face down, and " + c2_visible.toString() + " face up");
             }
 
             // Determine the winner of the tie
             if (c1_visible > c2_visible)
             {
-                log.push_back(p1->getName() + " wins the tie round with: " + c1_visible.toString());
-                p1->addWonCard(c1);
-                p1->addWonCard(c2);
-                p1->addWonCard(c1_hidden);
-                p1->addWonCard(c2_hidden);
-                p1->addWonCard(c1_visible);
-                p1->addWonCard(c2_visible);
-                p1->increment_wins();
+                log.push_back(player1->getName() + " wins the tie round with: " + c1_visible.toString());
+                player1->addWonCard(c1);
+                player1->addWonCard(c2);
+                player1->addWonCard(c1_hidden);
+                player1->addWonCard(c2_hidden);
+                player1->addWonCard(c1_visible);
+                player1->addWonCard(c2_visible);
+                player1->increment_wins();
             }
             else
             {
-                log.push_back(p2->getName() + " wins the tie round with: " + c2_visible.toString());
-                p2->addWonCard(c1);
-                p2->addWonCard(c2);
-                p2->addWonCard(c1_hidden);
-                p2->addWonCard(c2_hidden);
-                p2->addWonCard(c1_visible);
-                p2->addWonCard(c2_visible);
-                p2->increment_wins();
+                log.push_back(player2->getName() + " wins the tie round with: " + c2_visible.toString());
+                player2->addWonCard(c1);
+                player2->addWonCard(c2);
+                player2->addWonCard(c1_hidden);
+                player2->addWonCard(c2_hidden);
+                player2->addWonCard(c1_visible);
+                player2->addWonCard(c2_visible);
+                player2->increment_wins();
             }
         }
         else
@@ -181,17 +181,17 @@ namespace ariel
             // Determine the winner of this turn
             if (c1 > c2)
             {
-                log.push_back(p1->getName() + " wins the round with: " + c1.toString());
-                p1->addWonCard(c1);
-                p1->addWonCard(c2);
-                p1->increment_wins();
+                log.push_back(player1->getName() + " wins the round with: " + c1.toString());
+                player1->addWonCard(c1);
+                player1->addWonCard(c2);
+                player1->increment_wins();
             }
             else
             {
-                log.push_back(p2->getName() + " wins the round with: " + c2.toString());
-                p2->addWonCard(c1);
-                p2->addWonCard(c2);
-                p2->increment_wins();
+                log.push_back(player2->getName() + " wins the round with: " + c2.toString());
+                player2->addWonCard(c1);
+                player2->addWonCard(c2);
+                player2->increment_wins();
             }
         }
     }
@@ -226,15 +226,15 @@ namespace ariel
      */
     void Game::printWiner()
     {
-        int p1_cards = p1->cardesTaken();
-        int p2_cards = p2->cardesTaken();
+        int p1_cards = player1->cardesTaken();
+        int p2_cards = player2->cardesTaken();
         if (p1_cards > p2_cards)
         {
-            log.push_back(p1->getName() + " is the winner");
+            log.push_back(player1->getName() + " is the winner");
         }
         else if (p1_cards < p2_cards)
         {
-            log.push_back(p2->getName() + " is the winner");
+            log.push_back(player2->getName() + " is the winner");
         }
         else
         {
@@ -270,8 +270,8 @@ namespace ariel
     {
         int total = getHistorySize() / 2;
 
-        int p1_wins = p1->getWins();
-        int p2_wins = p2->getWins();
+        int p1_wins = player1->getWins();
+        int p2_wins = player2->getWins();
 
         double p1_rate = (double)p1_wins / (double)total;
         double p2_rate = (double)p2_wins / (double)total;
@@ -291,9 +291,9 @@ namespace ariel
         red();
         cout << "Total turns played: " << total - ties << endl;
         green();
-        cout << p1->getName() << " wins: " << p1_wins << " times, and the win rate is: " << p1_rate << "%" << endl;
+        cout << player1->getName() << " wins: " << p1_wins << " times, and the win rate is: " << p1_rate << "%" << endl;
         yellow();
-        cout << p2->getName() << " wins: " << p2_wins << " times, and the win rate is: " << p2_rate << "%" << endl;
+        cout << player2->getName() << " wins: " << p2_wins << " times, and the win rate is: " << p2_rate << "%" << endl;
         blue();
         cout << "Number of ties: " << ties << endl;
         reset();
@@ -322,7 +322,7 @@ namespace ariel
      */
     bool Game::gameOver()
     {
-        return (p1->stacksize() == 0 || p2->stacksize() == 0);
+        return (player1->stacksize() == 0 || player2->stacksize() == 0);
     }
 
     /**
@@ -355,9 +355,9 @@ namespace ariel
         for (size_t i = 0; i < 52; i++)
         {
             if (i % 2 == 0)
-                p1->takeCard(deck[i]);
+                player1->takeCard(deck[i]);
             else
-                p2->takeCard(deck[i]);
+                player2->takeCard(deck[i]);
         }
     }
 }

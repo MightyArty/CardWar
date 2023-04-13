@@ -4,23 +4,22 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <player.hpp>
-#include <card.hpp>
+#include "player.hpp"
+#include "card.hpp"
 
 namespace ariel
 {
     class Game
     {
     private:
-        Player *p1;
-        Player *p2;
+        Player *player1;
+        Player *player2;
         vector<Card> deck;
         vector<Card> history;
         vector<string> log;
 
     public:
-        Game(Player &p1, Player &p2);
-        ~Game();
+        Game(Player &player1, Player &player2);
         void playTurn();
         void playAll();
         void printLastTurn();

@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <card.hpp>
+#include "card.hpp"
 #include <vector>
 using namespace std;
 
@@ -22,15 +22,14 @@ namespace ariel
     public:
         Player(string name);
         Player();
-        ~Player();
 
         string getName();
 
         Card playCard(int index);
 
-        void takeCard(Card c);
+        void takeCard(Card card);
 
-        void addWonCard(Card c);
+        void addWonCard(Card card);
 
         int stacksize();
 

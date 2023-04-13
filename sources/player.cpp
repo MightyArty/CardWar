@@ -36,7 +36,7 @@ namespace ariel
     /**
      * @brief De-Constructor
      */
-    Player::~Player() {}
+    // Player::~Player() {}
 
     /**
      * @return the card amount of the player

@@ -14,7 +14,6 @@ namespace ariel
         string rank; // {Ace, Two, ...}
         int value;
         Card(string rank, string type, int value);
-        ~Card();
         string getRank();
         string getType();
         string toString();

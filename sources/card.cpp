@@ -20,7 +20,7 @@ namespace ariel
     /**
      * @brief De-Constructor for the Card
      */
-    Card::~Card() {}
+    // Card::~Card() = default;
 
     /**
      * @return the rank of the card
